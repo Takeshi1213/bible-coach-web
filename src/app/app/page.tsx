@@ -82,13 +82,21 @@ export default function AppPage() {
   }
   
   async function startSession() {
+    if (!passageText.trim()) {
+      setStatus("請先貼上經文");
+      return;
+    }
+    console.log("startSession passageText =", passageText);
     setStatus("建立研經流程中...");
     setSessionId("");
 
     const res = await fetch("/api/session/start", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({mode, passageText,}),
+      body: JSON.stringify({
+        mode, 
+        passageText,
+      }),
     });
 
     const data = await res.json();
