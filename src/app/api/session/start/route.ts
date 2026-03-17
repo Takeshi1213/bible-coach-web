@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
   try {
-    const { mode, passageText} = await req.json();
+    const { mode, passageText } = await req.json();
 
     const cookieStore = await cookies();
     const rawMode = (mode ?? "quick").toString().toLowerCase();
@@ -34,6 +34,9 @@ export async function POST(req: Request) {
 
     const userId = userData.user.id;
 
+    if (!passageText || typeof passageText !== "string" || !passageText.trim()) {
+      return NextResponse.json({ error: "passageText is required" }, { status: 400 });
+    }
     const { data, error } = await supabase
       .from("study_sessions")
       .insert({

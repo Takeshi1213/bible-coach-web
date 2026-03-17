@@ -88,7 +88,7 @@ export default function AppPage() {
     const res = await fetch("/api/session/start", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({mode}),
+      body: JSON.stringify({mode, passageText,}),
     });
 
     const data = await res.json();
