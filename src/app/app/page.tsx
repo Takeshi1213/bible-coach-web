@@ -222,7 +222,7 @@ async function loadSessionDetail(targetSessionId: string) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         sessionId,
-        passageText: activePassageText,
+        passageText: activePassageText ?? "",
         userMessage: text,
       }),
     });
