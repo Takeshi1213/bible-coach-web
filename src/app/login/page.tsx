@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const supabase = createClient();
   const router = useRouter();
+
+  const emailRef = useRef<HTMLInputElement>(null);
   
   // 狀態管理：控制目前是輸入 Email 還是輸入驗證碼
   const [step, setStep] = useState<1 | 2>(1);
@@ -68,14 +70,17 @@ export default function LoginPage() {
             <div>
               <label className="block text-sm font-medium mb-1">電子信箱</label>
               <input
+                ref={emailRef}                                // 👈 綁定把手
+                onClick={() => emailRef.current?.focus()}     // 👈 被點擊時，強制系統把游標塞進去！
                 id="email"
                 name="email"
-                autoComplete="email"          // 👈 讓手機的密碼管理員正常運作
-                autoCapitalize="none"         // 👈 關閉首字母自動大寫，避免 iOS 鍵盤卡頓
-                autoCorrect="off"             // 👈 關閉自動拼字修正
-                spellCheck="false"            // 👈 關閉拼字檢查
-                disabled={isLoading}          // 👈 處理中時把輸入框鎖起來，避免重複觸發
-                className="w-full border px-3 py-2 rounded focus:outline-none focus:border-black disabled:bg-gray-100 disabled:text-gray-400"
+                autoComplete="email"
+                autoCapitalize="none"
+                autoCorrect="off"
+                spellCheck="false"
+                disabled={isLoading}
+                // 👇 注意這裡的 class 加入了 select-text, touch-auto, pointer-events-auto, relative, z-50
+                className="w-full border px-3 py-2 rounded focus:outline-none focus:border-black disabled:bg-gray-100 disabled:text-gray-400 select-text touch-auto pointer-events-auto relative z-50"
                 placeholder="your@email.com"
                 type="email"
                 required
