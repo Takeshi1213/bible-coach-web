@@ -11,11 +11,11 @@ export default function LoginPage() {
   // 狀態管理：控制目前是輸入 Email 還是輸入驗證碼
   const [step, setStep] = useState<1 | 2>(1);
   const [email, setEmail] = useState("");
-  const [token, setToken] = useState(""); // 6位數驗證碼
+  const [token, setToken] = useState(""); // 8位數驗證碼
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // 第一步：發送 6 位數驗證碼到信箱
+  // 第一步：發送 8 位數驗證碼到信箱
   async function handleSendCode(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
@@ -35,7 +35,7 @@ export default function LoginPage() {
     setIsLoading(false);
   }
 
-  // 第二步：驗證 6 位數密碼
+  // 第二步：驗證 8 位數密碼
   async function handleVerifyCode(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
@@ -82,23 +82,23 @@ export default function LoginPage() {
               disabled={isLoading}
               className="w-full border border-black bg-black text-white px-3 py-2 rounded font-bold hover:bg-gray-800 disabled:opacity-50"
             >
-              {isLoading ? "處理中..." : "寄送 6 位數登入碼"}
+              {isLoading ? "處理中..." : "寄送 8 位數登入碼"}
             </button>
           </form>
         ) : (
           <form onSubmit={handleVerifyCode} className="space-y-4">
             <div className="text-center">
-              <p className="text-sm font-medium text-gray-600">已將 6 位數密碼寄至：</p>
+              <p className="text-sm font-medium text-gray-600">已將 8 位數密碼寄至：</p>
               <p className="text-sm font-bold mt-1">{email}</p>
             </div>
             
             <div>
               <input
                 className="w-full border px-3 py-3 rounded text-center tracking-[0.5em] text-2xl font-bold focus:outline-none focus:border-black"
-                placeholder="123456"
+                placeholder="12345678"
                 type="text"
                 required
-                maxLength={6}
+                maxLength={8}
                 value={token}
                 onChange={(e) => setToken(e.target.value)}
               />
