@@ -78,7 +78,6 @@ export default function LoginPage() {
                 autoCapitalize="none"
                 autoCorrect="off"
                 spellCheck="false"
-                disabled={isLoading}
                 // 👇 注意這裡的 class 加入了 select-text, touch-auto, pointer-events-auto, relative, z-50
                 className="w-full border px-3 py-2 rounded focus:outline-none focus:border-black disabled:bg-gray-100 disabled:text-gray-400 select-text touch-auto pointer-events-auto relative z-50"
                 placeholder="your@email.com"
