@@ -68,7 +68,14 @@ export default function LoginPage() {
             <div>
               <label className="block text-sm font-medium mb-1">電子信箱</label>
               <input
-                className="w-full border px-3 py-2 rounded focus:outline-none focus:border-black"
+                id="email"
+                name="email"
+                autoComplete="email"          // 👈 讓手機的密碼管理員正常運作
+                autoCapitalize="none"         // 👈 關閉首字母自動大寫，避免 iOS 鍵盤卡頓
+                autoCorrect="off"             // 👈 關閉自動拼字修正
+                spellCheck="false"            // 👈 關閉拼字檢查
+                disabled={isLoading}          // 👈 處理中時把輸入框鎖起來，避免重複觸發
+                className="w-full border px-3 py-2 rounded focus:outline-none focus:border-black disabled:bg-gray-100 disabled:text-gray-400"
                 placeholder="your@email.com"
                 type="email"
                 required
