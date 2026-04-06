@@ -48,3 +48,27 @@ body {
 .dot:nth-child(1) { animation-delay: -0.32s; }
 .dot:nth-child(2) { animation-delay: -0.16s; }
 .dot:nth-child(3) { animation-delay: 0s; }
+
+/* =========================================
+   解決 iOS PWA 輸入框無法點擊 / 游標消失的問題
+   ========================================= */
+input, 
+textarea, 
+select {
+  /* 強制允許使用者選取與互動 */
+  -webkit-user-select: auto !important;
+  user-select: auto !important;
+  
+  /* 確保觸控事件不會被系統吃掉 */
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  
+  /* 關閉 iOS 預設的奇怪陰影與樣式，讓它回歸純粹的輸入框 */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* 確保整個 body 在 PWA 模式下不會誤鎖觸控 */
+body {
+  -webkit-tap-highlight-color: transparent;
+}
